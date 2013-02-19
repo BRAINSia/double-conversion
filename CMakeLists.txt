@@ -12,9 +12,9 @@ set(INSTALL_LIB_DIR CACHE PATH "Installation directory for libraries")
 set(INSTALL_INCLUDE_DIR CACHE PATH "Installation directory for include")
 # set suffix for CMake files used for packaging
 if(WIN32 AND NOT CYGWIN)
-  set(INSTALL_CMAKE_DIR CMake)
+  set(INSTALL_CMAKE_DIR cmake)
 else()
-  set(INSTALL_CMAKE_DIR lib/CMake/double-conversion)
+  set(INSTALL_CMAKE_DIR lib/cmake/double-conversion)
 endif()
 
 # Make relative paths absolute (needed later)
