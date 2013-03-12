@@ -42,7 +42,7 @@ class DiyFp {
   static const int kSignificandSize = 64;
 
   DiyFp() : f_(0), e_(0) {}
-  DiyFp(uint64_t f, int e) : f_(f), e_(e) {}
+  DiyFp(uint64_t initF, int initE) : f_(initF), e_(initE) {}
 
   // this = this - other.
   // The exponents of both numbers must be the same and the significand of this
@@ -76,22 +76,22 @@ class DiyFp {
 
   void Normalize() {
     ASSERT(f_ != 0);
-    uint64_t f = f_;
-    int e = e_;
+    uint64_t flocal = f_;
+    int elocal = e_;
 
     // This method is mainly called for normalizing boundaries. In general
     // boundaries need to be shifted by 10 bits. We thus optimize for this case.
     const uint64_t k10MSBits = UINT64_2PART_C(0xFFC00000, 00000000);
-    while ((f & k10MSBits) == 0) {
-      f <<= 10;
-      e -= 10;
+    while ((flocal & k10MSBits) == 0) {
+      flocal <<= 10;
+      elocal -= 10;
     }
-    while ((f & kUint64MSB) == 0) {
-      f <<= 1;
-      e--;
+    while ((flocal & kUint64MSB) == 0) {
+      flocal <<= 1;
+      elocal--;
     }
-    f_ = f;
-    e_ = e;
+    f_ = flocal;
+    e_ = elocal;
   }
 
   static DiyFp Normalize(const DiyFp& a) {
