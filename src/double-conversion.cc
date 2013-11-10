@@ -920,7 +920,7 @@ double StringToDoubleConverter::StringToIeee(Iterator input,
 double StringToDoubleConverter::StringToDouble(
     const char* buffer,
     int length,
-    int* processed_characters_count) {
+    int* processed_characters_count) const {
   return StringToIeee(buffer, length, true, processed_characters_count);
 }
 
@@ -928,22 +928,24 @@ double StringToDoubleConverter::StringToDouble(
 double StringToDoubleConverter::StringToDouble(
     const uc16* buffer,
     int length,
-    int* processed_characters_count) {
+    int* processed_characters_count) const {
   return StringToIeee(buffer, length, true, processed_characters_count);
 }
 
 
-float StringToDoubleConverter::StringToFloat(const char* buffer,
-                                             int length,
-                                             int* processed_characters_count) {
+float StringToDoubleConverter::StringToFloat(
+    const char* buffer,
+    int length,
+    int* processed_characters_count) const {
   return static_cast<float>(StringToIeee(buffer, length, false,
                                          processed_characters_count));
 }
 
 
-float StringToDoubleConverter::StringToFloat(const uc16* buffer,
-                                             int length,
-                                             int* processed_characters_count) {
+float StringToDoubleConverter::StringToFloat(
+    const uc16* buffer,
+    int length,
+    int* processed_characters_count) const {
   return static_cast<float>(StringToIeee(buffer, length, false,
                                          processed_characters_count));
 }
