@@ -678,7 +678,7 @@ double StringToDoubleConverter::StringToIeee(Iterator input,
       }
 
       ASSERT(buffer_pos == 0);
-      *processed_characters_count = current - input;
+      *processed_characters_count = static_cast<int>(current - input);
       return sign ? -Double::Infinity() : Double::Infinity();
     }
   }
@@ -697,7 +697,7 @@ double StringToDoubleConverter::StringToIeee(Iterator input,
       }
 
       ASSERT(buffer_pos == 0);
-      *processed_characters_count = current - input;
+      *processed_characters_count = static_cast<int>(current - input);
       return sign ? -Double::NaN() : Double::NaN();
     }
   }
@@ -706,7 +706,7 @@ double StringToDoubleConverter::StringToIeee(Iterator input,
   if (*current == '0') {
     ++current;
     if (current == end) {
-      *processed_characters_count = current - input;
+      *processed_characters_count = static_cast<int>(current - input);
       return SignedZero(sign);
     }
 
@@ -729,7 +729,7 @@ double StringToDoubleConverter::StringToIeee(Iterator input,
                                            &result_is_junk);
       if (!result_is_junk) {
         if (allow_trailing_spaces) AdvanceToNonspace(&current, end);
-        *processed_characters_count = current - input;
+        *processed_characters_count = static_cast<int>(current - input);
       }
       return result;
     }
@@ -738,7 +738,7 @@ double StringToDoubleConverter::StringToIeee(Iterator input,
     while (*current == '0') {
       ++current;
       if (current == end) {
-        *processed_characters_count = current - input;
+        *processed_characters_count = static_cast<int>(current - input);
         return SignedZero(sign);
       }
     }
@@ -786,7 +786,7 @@ double StringToDoubleConverter::StringToIeee(Iterator input,
       while (*current == '0') {
         ++current;
         if (current == end) {
-          *processed_characters_count = current - input;
+          *processed_characters_count = static_cast<int>(current - input);
           return SignedZero(sign);
         }
         exponent--;  // Move this 0 into the exponent.
@@ -894,7 +894,7 @@ double StringToDoubleConverter::StringToIeee(Iterator input,
                                   read_as_double,
                                   &result_is_junk);
     ASSERT(!result_is_junk);
-    *processed_characters_count = current - input;
+    *processed_characters_count = static_cast<int>(current - input);
     return result;
   }
 
@@ -912,7 +912,7 @@ double StringToDoubleConverter::StringToIeee(Iterator input,
   } else {
     converted = Strtof(Vector<const char>(buffer, buffer_pos), exponent);
   }
-  *processed_characters_count = current - input;
+  *processed_characters_count = static_cast<int>(current - input);
   return sign? -converted: converted;
 }
 
