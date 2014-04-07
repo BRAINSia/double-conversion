@@ -627,7 +627,7 @@ template <class Iterator>
 double StringToDoubleConverter::StringToIeee(Iterator input,
                                              int length,
                                              bool read_as_double,
-                                             int* processed_characters_count) {
+                                             int* processed_characters_count) const {
   Iterator current = input;
   Iterator end = input + length;
 
